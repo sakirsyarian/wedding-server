@@ -2,7 +2,7 @@
 
 const mongoose = require('../config/mongo');
 
-const CategorySchema = new mongoose.Schema(
+const RoleSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -13,6 +13,6 @@ const CategorySchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Category = mongoose.model('Category', CategorySchema);
+const Role = mongoose.model('Role', RoleSchema);
 
-module.exports = { Category, CategorySchema };
+module.exports = { Role, RoleSchema };
