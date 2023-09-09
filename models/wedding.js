@@ -1,7 +1,7 @@
 'use strict';
 
 const uniqueValidator = require('mongoose-unique-validator');
-const mongoose = require('../config/mongo');
+const mongoose = require('../config/mongodb');
 
 const WeddingSchema = new mongoose.Schema(
     {

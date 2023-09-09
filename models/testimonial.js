@@ -1,18 +1,14 @@
 'use strict';
 
-const mongoose = require('../config/mongo');
+const mongoose = require('../config/mongodb');
 
-const TestimonialSchema = new mongoose.Schema(
-    {
-        valuation: {
-            type: String,
-            required: true,
-        },
-        message: String,
-        test: Boolean,
+const TestimonialSchema = new mongoose.Schema({
+    valuation: {
+        type: String,
+        required: true,
     },
-    { timestamps: true }
-);
+    message: String,
+});
 
 const Testimonial = mongoose.model('Testimonial', TestimonialSchema);
 

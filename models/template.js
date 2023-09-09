@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('../config/mongo');
+const mongoose = require('../config/mongodb');
 const { CategorySchema } = require('./category');
 
 const TemplateSchema = new mongoose.Schema(
@@ -15,6 +15,8 @@ const TemplateSchema = new mongoose.Schema(
             primary: String,
             secondary: String,
             tertiary: String,
+            quaternary: String,
+            quinary: String,
             text: String,
         },
         fonts: {

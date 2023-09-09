@@ -1,0 +1,73 @@
+{
+    "slug": "astrid-sarian",
+    "mainImage": "wedding.png",
+    "music": "love.mp3",
+    "men": {
+        "name": "Sarian",
+        "image": "sarian.png",
+        "father": "Ronaldo",
+        "mother": "Katrina",
+        "socialMedia": {
+            "facebook": "sarian",
+            "instagram": "sarian",
+            "threads": "sarian"
+        }
+    },
+    "female": {
+        "name": "Astrid",
+        "image": "astrid.png",
+        "father": "Messi",
+        "mother": "Kendall",
+        "socialMedia": {
+            "facebook": "astrid",
+            "instagram": "astrid",
+            "threads": "astrid"
+        }
+    },
+    "countDown": "2023-09-09T05:49:10.729+00:00",
+    "marriageContract": {
+        "date": "2023-09-09T05:49:10.729+00:00",
+        "location": "Rumah Astrid"
+    },
+    "reception": {
+        "date": "2023-09-09T05:49:10.729+00:00",
+        "location": "Rumah Astrid"
+    },
+    "loveStory": {
+        "beginning": {
+            "image": "beginning.png",
+            "date": "2023-09-09T05:49:10.729+00:00",
+            "description": "Waktu itu baru ketemu dengan Astrid"
+        },
+        "dating": {
+            "image": "dating.png",
+            "date": "2023-09-09T05:49:10.729+00:00",
+            "description": "Astrid dan Sarian mencintai satu sama lain"
+        },
+        "wedding": {
+            "image": "wedding.png",
+            "date": "2023-09-09T05:49:10.729+00:00",
+            "description": "Akhirnya kita memustuskan untuk nikah"
+        }
+    },
+    "galleries": [
+        "gambar1.png",
+        "gambar2.png",
+        "gambar3.png"
+    ],
+    "gift": {
+        "bank": {
+            "bca": 64279356105,
+            "bri": 64279356105,
+            "bni": 64279356105,
+            "mandiri": 64279356105
+        },
+        "digital": {
+            "gopay": 64279356105,
+            "ovo": 64279356105,
+            "dana": 64279356105,
+            "linkaja": 64279356105
+        },
+        "address": "Rumah Astrid"
+    }
+}

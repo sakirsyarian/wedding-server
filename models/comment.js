@@ -1,6 +1,6 @@
 'use strict';
 
-const mongoose = require('../config/mongo');
+const mongoose = require('../config/mongodb');
 
 const CommentSchema = new mongoose.Schema(
     {
@@ -13,7 +13,6 @@ const CommentSchema = new mongoose.Schema(
             required: true,
         },
         message: String,
-        test: Boolean,
     },
     { timestamps: true }
 );

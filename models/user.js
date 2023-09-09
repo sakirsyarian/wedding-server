@@ -2,9 +2,8 @@
 
 const uniqueValidator = require('mongoose-unique-validator');
 
-const mongoose = require('../config/mongo');
+const mongoose = require('../config/mongodb');
 const { TestimonialSchema } = require('./testimonial');
-const { RoleSchema } = require('./role');
 
 const UserSchema = new mongoose.Schema(
     {
@@ -12,17 +11,25 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
             unique: true,
+            uniqueCaseInsensitive: true,
         },
         password: {
             type: String,
             required: true,
         },
         name: String,
-        image: String,
-        phoneNumber: Number,
+        image: {
+            type: String,
+            default: 'default.png',
+        },
+        phoneNumber: String,
         isActive: Boolean,
         testimonial: TestimonialSchema,
-        role: RoleSchema,
+        role: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Role',
+            required: true,
+        },
         test: Boolean,
     },
     { timestamps: true }
