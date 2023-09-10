@@ -1,19 +1,19 @@
 'use strict';
 
-const Role = require('../models/role');
+const Category = require('../models/category');
 
-class ControllerRole {
+class ControllerCategory {
     static async adminFind(req, res, next) {
         try {
-            const role = await Role.find();
-            if (!role.length) {
+            const category = await Category.find();
+            if (!category.length) {
                 throw {
                     name: 'NotFound',
-                    message: 'role data does not exist',
+                    message: 'category data does not exist',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: role });
+            res.status(200).json({ isSuccess: true, data: category });
         } catch (error) {
             next(error);
         }
@@ -23,10 +23,10 @@ class ControllerRole {
         try {
             const { name } = req.body;
 
-            const createRole = new Role({ name });
-            const role = await createRole.save();
+            const createCategory = new Category({ name });
+            const category = await createCategory.save();
 
-            res.status(201).json({ isSuccess: true, data: role });
+            res.status(201).json({ isSuccess: true, data: category });
         } catch (error) {
             next(error);
         }
@@ -35,16 +35,16 @@ class ControllerRole {
     static async adminFindById(req, res, next) {
         try {
             const { id } = req.params;
-            const role = await Role.findById(id);
+            const category = await Category.findById(id);
 
-            if (!role) {
+            if (!category) {
                 throw {
                     name: 'NotFound',
-                    message: 'role not found',
+                    message: 'category not found',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: role });
+            res.status(200).json({ isSuccess: true, data: category });
         } catch (error) {
             next(error);
         }
@@ -55,16 +55,16 @@ class ControllerRole {
             const { id } = req.params;
             const { name } = req.body;
 
-            const role = await Role.findByIdAndUpdate(id, { name }, { returnDocument: 'after', runValidators: true });
+            const category = await Category.findByIdAndUpdate(id, { name }, { returnDocument: 'after', runValidators: true });
 
-            if (!role) {
+            if (!category) {
                 throw {
                     name: 'NotFound',
-                    message: 'role not found',
+                    message: 'category not found',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: role });
+            res.status(200).json({ isSuccess: true, data: category });
         } catch (error) {
             next(error);
         }
@@ -73,20 +73,20 @@ class ControllerRole {
     static async adminFindByIdAndDelete(req, res, next) {
         try {
             const { id } = req.params;
-            const role = await Role.findByIdAndDelete(id);
+            const category = await Category.findByIdAndDelete(id);
 
-            if (!role) {
+            if (!category) {
                 throw {
                     name: 'NotFound',
-                    message: 'role not found',
+                    message: 'category not found',
                 };
             }
 
-            res.status(200).json({ message: `${role.name} successfully deleted` });
+            res.status(200).json({ message: `${category.name} successfully deleted` });
         } catch (error) {
             next(error);
         }
     }
 }
 
-module.exports = ControllerRole;
+module.exports = ControllerCategory;

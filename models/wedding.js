@@ -7,22 +7,22 @@ const WeddingSchema = new mongoose.Schema(
     {
         slug: {
             type: String,
-            required: true,
+            required: [true, '{PATH} is required'],
             unique: true,
         },
         mainImage: {
             type: String,
-            required: true,
+            required: [true, '{PATH} is required'],
         },
         music: String,
         men: {
             name: {
                 type: String,
-                required: true,
+                required: [true, '{PATH} is required'],
             },
             image: {
                 type: String,
-                required: true,
+                required: [true, '{PATH} is required'],
             },
             father: String,
             mother: String,
@@ -35,11 +35,11 @@ const WeddingSchema = new mongoose.Schema(
         female: {
             name: {
                 type: String,
-                required: true,
+                required: [true, '{PATH} is required'],
             },
             image: {
                 type: String,
-                required: true,
+                required: [true, '{PATH} is required'],
             },
             father: String,
             mother: String,
@@ -94,7 +94,7 @@ const WeddingSchema = new mongoose.Schema(
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
-            required: true,
+            required: [true, '{PATH} is required'],
         },
         test: Boolean,
     },
@@ -102,7 +102,7 @@ const WeddingSchema = new mongoose.Schema(
 );
 
 // Menerapkan plugin pada skema
-WeddingSchema.plugin(uniqueValidator);
+WeddingSchema.plugin(uniqueValidator, { message: '{PATH} must be unique.' });
 const Wedding = mongoose.model('Wedding', WeddingSchema);
 
 module.exports = Wedding;

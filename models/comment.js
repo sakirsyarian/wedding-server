@@ -6,17 +6,17 @@ const CommentSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true,
+            required: [true, '{PATH} is required'],
         },
         attendance: {
             type: String,
-            required: true,
+            required: [true, '{PATH} is required'],
         },
         message: String,
         wedding: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Wedding',
-            required: true,
+            required: [true, '{PATH} is required'],
         },
     },
     { timestamps: true }

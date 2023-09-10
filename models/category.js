@@ -5,10 +5,10 @@ const mongoose = require('../config/mongodb');
 const CategorySchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: [true, '{PATH} is required'],
     },
 });
 
 const Category = mongoose.model('Category', CategorySchema);
 
-module.exports = { Category, CategorySchema };
+module.exports = Category;
