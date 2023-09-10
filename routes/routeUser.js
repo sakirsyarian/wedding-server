@@ -6,7 +6,7 @@ const ControllerUser = require('../controllers/controllerUser');
 // * role = admin
 
 // auth
-router.get('/signin', ControllerUser.findOne);
+router.get('/signin', ControllerUser.adminFindOne);
 
 // user
 router.get('/v1/admin/users', ControllerUser.adminFind);

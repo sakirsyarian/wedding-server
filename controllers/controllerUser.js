@@ -1,20 +1,18 @@
 'use strict';
 
 const User = require('../models/user');
-const Role = require('../models/role');
 
 class ControllerUser {
     // * role = admin
 
     // auth
-    static async findOne(req, res, next) {
+    static async adminFindOne(req, res, next) {
         try {
             const { email } = req.body;
             const user = await User.findOne({ email });
 
             res.status(200).json({ isSuccess: true, data: user });
         } catch (error) {
-            res.status(500).json({ isSuccess: false, error });
             next(error);
         }
     }
@@ -25,7 +23,6 @@ class ControllerUser {
             const user = await User.find();
             res.status(200).json({ isSuccess: true, data: user });
         } catch (error) {
-            res.status(500).json({ isSuccess: false, error });
             next(error);
         }
     }
@@ -97,7 +94,7 @@ class ControllerUser {
                 };
             }
 
-            res.status(200).json({ message: `${user.name} deleted successfully` });
+            res.status(200).json({ message: `${user.name} successfully deleted` });
         } catch (error) {
             next(error);
         }

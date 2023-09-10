@@ -5,7 +5,7 @@ const mongoose = require('../config/mongodb');
 const RoleSchema = new mongoose.Schema({
     name: {
         type: String,
-        required: true,
+        required: [true, '{PATH} is required'],
     },
 });
 
