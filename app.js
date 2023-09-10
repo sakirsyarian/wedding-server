@@ -1,11 +1,15 @@
 'use strict';
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const cors = require('cors');
 
 const routes = require('./routes');
-const errorHandler = require('./middlewares/errorHandler');
+const errorHandler = require('./middlewares/error');
 
 app.use(cors());
 app.use(express.json());

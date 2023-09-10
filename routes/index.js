@@ -3,8 +3,11 @@
 const express = require('express');
 const router = express.Router();
 
+const authentication = require('../middlewares/auth');
 const routerUser = require('./routeUser');
 const routerRole = require('./routeRole');
+const routerAuth = require('./routeAuth');
+const routerTestimonial = require('./routeTestimonial');
 
 router.get('/', (req, res) => {
     res.status(200).json({
@@ -15,7 +18,11 @@ router.get('/', (req, res) => {
     });
 });
 
+router.use(routerAuth);
+router.use(authentication);
+
 router.use(routerUser);
 router.use(routerRole);
+router.use(routerTestimonial);
 
 module.exports = router;

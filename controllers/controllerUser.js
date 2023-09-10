@@ -1,17 +1,51 @@
 'use strict';
 
 const User = require('../models/user');
+const Role = require('../models/role');
+const { hashPassword, comparePassword } = require('../lib/bcrypt');
+const { generateToken } = require('../lib/jwt');
 
 class ControllerUser {
     // * role = admin
 
     // auth
-    static async adminFindOne(req, res, next) {
+    static async adminSignin(req, res, next) {
         try {
-            const { email } = req.body;
+            const { email, password } = req.body;
             const user = await User.findOne({ email });
 
-            res.status(200).json({ isSuccess: true, data: user });
+            if (!user) {
+                throw {
+                    name: 'AuthenticationError',
+                    message: 'invalid email/ password',
+                };
+            }
+
+            const isValid = comparePassword(password, user.password);
+            if (!isValid) {
+                throw {
+                    name: 'AuthenticationError',
+                    message: 'invalid email/ password',
+                };
+            }
+
+            // if role is not admin, return 403
+            const role = await Role.findOne({ _id: user.role });
+            if (role.name !== 'admin') {
+                throw {
+                    name: 'Forbidden',
+                    message: 'user is forbidden to enter',
+                };
+            }
+
+            user.password = null;
+            const access_token = generateToken({ id: user._id });
+
+            res.status(200).json({
+                isSuccess: true,
+                access_token,
+                data: user,
+            });
         } catch (error) {
             next(error);
         }
@@ -21,6 +55,14 @@ class ControllerUser {
     static async adminFind(req, res, next) {
         try {
             const user = await User.find();
+            if (!user.length) {
+                throw {
+                    name: 'NotFound',
+                    message: 'user data does not exist',
+                };
+            }
+
+            user.map((item) => (item.password = null));
             res.status(200).json({ isSuccess: true, data: user });
         } catch (error) {
             next(error);
@@ -31,9 +73,11 @@ class ControllerUser {
         try {
             const { email, password, name, phoneNumber, role } = req.body;
 
-            const createUser = new User({ email, password, name, phoneNumber, role });
+            const bcryptjs = hashPassword(password);
+            const createUser = new User({ email, password: bcryptjs, name, phoneNumber, role });
             const user = await createUser.save();
 
+            user.password = null;
             res.status(201).json({ isSuccess: true, data: user });
         } catch (error) {
             next(error);
@@ -48,10 +92,11 @@ class ControllerUser {
             if (!user) {
                 throw {
                     name: 'NotFound',
-                    message: 'User not found',
+                    message: 'user not found',
                 };
             }
 
+            user.password = null;
             res.status(200).json({ isSuccess: true, data: user });
         } catch (error) {
             next(error);
@@ -61,22 +106,47 @@ class ControllerUser {
     static async adminFindByIdAndUpdate(req, res, next) {
         try {
             const { id } = req.params;
-            const { email, password, name, phoneNumber } = req.body;
+            const { email, name, phoneNumber, role } = req.body;
 
             const user = await User.findByIdAndUpdate(
                 id,
-                { email, password, name, phoneNumber },
+                { email, name, phoneNumber, role },
                 { returnDocument: 'after', runValidators: true }
             );
 
             if (!user) {
                 throw {
                     name: 'NotFound',
-                    message: 'User not found',
+                    message: 'user not found',
                 };
             }
 
             res.status(200).json({ isSuccess: true, data: user });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async adminFindByIdAndPatch(req, res, next) {
+        try {
+            const { id } = req.params;
+            const { password } = req.body;
+
+            const bcryptjs = hashPassword(password);
+            const user = await User.findByIdAndUpdate(
+                id,
+                { password: bcryptjs },
+                { returnDocument: 'after', runValidators: true }
+            );
+
+            if (!user) {
+                throw {
+                    name: 'NotFound',
+                    message: 'user not found',
+                };
+            }
+
+            res.status(200).json({ isSuccess: true, message: 'password successfully updated' });
         } catch (error) {
             next(error);
         }
@@ -90,7 +160,7 @@ class ControllerUser {
             if (!user) {
                 throw {
                     name: 'NotFound',
-                    message: 'User not found',
+                    message: 'user not found',
                 };
             }
 
