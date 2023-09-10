@@ -9,13 +9,14 @@ const UserSchema = new mongoose.Schema(
     {
         email: {
             type: String,
-            required: true,
+            index: true,
             unique: true,
+            required: [true, '{PATH} is required'],
             uniqueCaseInsensitive: true,
         },
         password: {
             type: String,
-            required: true,
+            required: [true, '{PATH} is required'],
         },
         name: String,
         image: {
@@ -23,12 +24,15 @@ const UserSchema = new mongoose.Schema(
             default: 'default.png',
         },
         phoneNumber: String,
-        isActive: Boolean,
+        isActive: {
+            type: Boolean,
+            default: true,
+        },
         testimonial: TestimonialSchema,
         role: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Role',
-            required: true,
+            required: [true, '{PATH} is required'],
         },
         test: Boolean,
     },
@@ -36,7 +40,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 // Menerapkan plugin pada skema
-UserSchema.plugin(uniqueValidator);
+UserSchema.plugin(uniqueValidator, { message: '{PATH} must be unique.' });
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

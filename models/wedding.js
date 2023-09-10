@@ -96,10 +96,6 @@ const WeddingSchema = new mongoose.Schema(
             ref: 'User',
             required: true,
         },
-        comment: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Comment',
-        },
         test: Boolean,
     },
     { timestamps: true }

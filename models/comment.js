@@ -13,6 +13,11 @@ const CommentSchema = new mongoose.Schema(
             required: true,
         },
         message: String,
+        wedding: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Wedding',
+            required: true,
+        },
     },
     { timestamps: true }
 );
