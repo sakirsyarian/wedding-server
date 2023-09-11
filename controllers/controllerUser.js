@@ -31,7 +31,7 @@ class ControllerUser {
 
             // if role is not admin, return 403
             const role = await Role.findOne({ _id: user.role });
-            if (role.name !== 'admin') {
+            if (role.name !== 'Admin') {
                 throw {
                     name: 'Forbidden',
                     message: 'user is forbidden to enter',

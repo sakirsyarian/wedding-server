@@ -3,17 +3,15 @@
 const Template = require('../models/template');
 const templateData = require('../data/template.json');
 
-const { Category } = require('../models/category');
-const categoryData = require('../data/category.json');
+const Category = require('../models/category');
 
 (async function () {
-    const category = new Category(categoryData);
+    const categoryData = await Category.findOne({ name: 'Warrior' });
     const template = new Template({
         ...templateData,
-        category,
+        category: categoryData._id,
     });
 
-    await category.save();
     await template.save();
     console.log('template created');
 })();

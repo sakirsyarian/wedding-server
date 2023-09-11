@@ -19,8 +19,8 @@ const auth = async (req, res, next) => {
 
         if (!user) {
             throw {
-                name: 'AuthenticationError',
-                message: 'you must login first',
+                name: 'NotFound',
+                message: 'user not found, please login first',
             };
         }
 
