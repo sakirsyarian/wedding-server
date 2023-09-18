@@ -5,15 +5,15 @@ const Category = require('../models/category');
 class ControllerCategory {
     static async adminFind(req, res, next) {
         try {
-            const category = await Category.find();
-            if (!category.length) {
+            const categories = await Category.find();
+            if (!categories.length) {
                 throw {
                     name: 'NotFound',
                     message: 'category data does not exist',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: category });
+            res.status(200).json({ isSuccess: true, data: categories });
         } catch (error) {
             next(error);
         }

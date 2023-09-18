@@ -16,78 +16,78 @@ const WeddingSchema = new mongoose.Schema(
         },
         music: String,
         men: {
-            name: {
+            menName: {
                 type: String,
                 required: [true, '{PATH} is required'],
             },
-            image: {
+            menImage: {
                 type: String,
                 required: [true, '{PATH} is required'],
             },
-            father: String,
-            mother: String,
-            socialMedia: {
-                facebook: String,
-                instagram: String,
-                threads: String,
+            menFather: String,
+            menMother: String,
+            menSocialMedia: {
+                menFacebook: String,
+                menInstagram: String,
+                menThreads: String,
             },
         },
         female: {
-            name: {
+            femaleName: {
                 type: String,
                 required: [true, '{PATH} is required'],
             },
-            image: {
+            femaleImage: {
                 type: String,
                 required: [true, '{PATH} is required'],
             },
-            father: String,
-            mother: String,
-            socialMedia: {
-                facebook: String,
-                instagram: String,
-                threads: String,
+            femaleFather: String,
+            femaleMother: String,
+            femaleSocialMedia: {
+                femaleFacebook: String,
+                femaleInstagram: String,
+                femaleThreads: String,
             },
         },
         countDown: Date,
         marriageContract: {
-            date: Date,
-            location: String,
+            marriageDate: Date,
+            marriageLocation: String,
         },
         reception: {
-            date: Date,
-            location: String,
+            receptionDate: Date,
+            receptionLocation: String,
         },
         loveStory: {
             beginning: {
-                image: String,
-                date: Date,
-                description: String,
+                beginningImage: String,
+                beginningDate: Date,
+                beginningDescription: String,
             },
             dating: {
-                image: String,
-                date: Date,
-                description: String,
+                datingImage: String,
+                datingDate: Date,
+                datingDescription: String,
             },
             wedding: {
-                image: String,
-                date: Date,
-                description: String,
+                weddingImage: String,
+                weddingDate: Date,
+                weddingDescription: String,
             },
         },
         galleries: [String],
         gift: {
             bank: {
-                bca: Number,
-                bri: Number,
-                bni: Number,
-                mandiri: Number,
+                bca: String,
+                bri: String,
+                bni: String,
+                mandiri: String,
             },
             digital: {
-                gopay: Number,
-                ovo: Number,
-                dana: Number,
-                linkaja: Number,
+                gopay: String,
+                ovo: String,
+                dana: String,
+                linkaja: String,
             },
             address: String,
         },

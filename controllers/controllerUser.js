@@ -54,16 +54,16 @@ class ControllerUser {
     // user
     static async adminFind(req, res, next) {
         try {
-            const user = await User.find();
-            if (!user.length) {
+            const users = await User.find().populate('role');
+            if (!users.length) {
                 throw {
                     name: 'NotFound',
                     message: 'user data does not exist',
                 };
             }
 
-            user.map((item) => (item.password = null));
-            res.status(200).json({ isSuccess: true, data: user });
+            users.map((item) => (item.password = null));
+            res.status(200).json({ isSuccess: true, data: users });
         } catch (error) {
             next(error);
         }

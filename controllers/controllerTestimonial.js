@@ -7,8 +7,8 @@ class ControllerTestimonial {
     // * role = admin
     static async adminFind(req, res, next) {
         try {
-            const user = await User.find();
-            if (!user.length) {
+            const users = await User.find();
+            if (!users.length) {
                 throw {
                     name: 'NotFound',
                     message: 'testimonial data does not exist',
@@ -16,7 +16,7 @@ class ControllerTestimonial {
             }
 
             const testimonial = [];
-            user.map((item) => {
+            users.map((item) => {
                 if (item.testimonial) testimonial.push(item.testimonial);
             });
 

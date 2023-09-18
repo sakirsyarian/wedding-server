@@ -5,15 +5,15 @@ const Role = require('../models/role');
 class ControllerRole {
     static async adminFind(req, res, next) {
         try {
-            const role = await Role.find();
-            if (!role.length) {
+            const roles = await Role.find();
+            if (!roles.length) {
                 throw {
                     name: 'NotFound',
                     message: 'role data does not exist',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: role });
+            res.status(200).json({ isSuccess: true, data: roles });
         } catch (error) {
             next(error);
         }

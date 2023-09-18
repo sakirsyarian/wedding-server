@@ -5,15 +5,15 @@ const Template = require('../models/template');
 class ControllerTemplate {
     static async adminFind(req, res, next) {
         try {
-            const template = await Template.find();
-            if (!template.length) {
+            const templates = await Template.find().populate('category');
+            if (!templates.length) {
                 throw {
                     name: 'NotFound',
                     message: 'template data does not exist',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: template });
+            res.status(200).json({ isSuccess: true, data: templates });
         } catch (error) {
             next(error);
         }
