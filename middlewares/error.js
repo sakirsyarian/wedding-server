@@ -26,6 +26,10 @@ const errorHandler = (err, req, res, next) => {
         return statusCode(401, { message: 'Invalid token' });
     }
 
+    if (err.name === 'RefreshTokenExpiredError') {
+        return statusCode(401, { name: err.name, message: err.message });
+    }
+
     if (err.name === 'Forbidden') {
         return statusCode(403, { message: err.message });
     }

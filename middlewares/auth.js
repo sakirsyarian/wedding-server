@@ -5,7 +5,8 @@ const User = require('../models/user');
 
 const auth = async (req, res, next) => {
     try {
-        const { authorization } = req.headers;
+        let { authorization } = req.headers;
+        // console.log(authorization, 'authorization');
 
         if (!authorization) {
             throw {
@@ -14,9 +15,17 @@ const auth = async (req, res, next) => {
             };
         }
 
+        authorization = authorization.replace('Bearer ', '');
         const decode = verifyToken(authorization);
-        const user = await User.findById(decode.id);
 
+        if (decode.name === 'TokenExpiredError') {
+            throw {
+                name: 'AuthenticationError',
+                message: 'you must login again',
+            };
+        }
+
+        const user = await User.findById(decode.id);
         if (!user) {
             throw {
                 name: 'NotFound',

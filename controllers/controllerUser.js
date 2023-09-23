@@ -3,7 +3,7 @@
 const User = require('../models/user');
 const Role = require('../models/role');
 const { hashPassword, comparePassword } = require('../lib/bcrypt');
-const { generateToken } = require('../lib/jwt');
+const { generateToken, generateRefreshToken, verifyToken } = require('../lib/jwt');
 
 class ControllerUser {
     // * role = admin
@@ -40,11 +40,55 @@ class ControllerUser {
 
             user.password = null;
             const access_token = generateToken({ id: user._id });
+            const refresh_token = generateRefreshToken({ id: user._id });
 
             res.status(200).json({
                 isSuccess: true,
                 access_token,
+                refresh_token,
                 data: user,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async adminRefreshToken(req, res, next) {
+        try {
+            // refresh token
+            let { refreshtoken } = req.headers;
+            console.log(refreshtoken, 'refreshtoken');
+
+            if (!refreshtoken) {
+                throw {
+                    name: 'AuthenticationError',
+                    message: 'you must login first',
+                };
+            }
+
+            refreshtoken = refreshtoken.replace('Bearer ', '');
+            const decode = verifyToken(refreshtoken);
+
+            if (decode.name === 'TokenExpiredError') {
+                throw {
+                    name: 'RefreshTokenExpiredError',
+                    message: 'you must login again',
+                };
+            }
+
+            const user = await User.findById(decode.id);
+            if (!user) {
+                throw {
+                    name: 'NotFound',
+                    message: 'user not found',
+                };
+            }
+
+            const access_token = generateToken({ id: user._id });
+
+            res.status(200).json({
+                isSuccess: true,
+                access_token,
             });
         } catch (error) {
             next(error);
