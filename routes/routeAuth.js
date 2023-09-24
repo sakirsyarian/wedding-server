@@ -9,5 +9,6 @@ router.post('/v1/admin/signin', ControllerUser.adminSignin);
 router.get('/v1/admin/refresh-token', ControllerUser.adminRefreshToken);
 
 // * role = customer
+router.post('/v1/customer/login', ControllerUser.customerSignin);
 
 module.exports = router;

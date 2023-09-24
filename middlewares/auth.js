@@ -6,7 +6,6 @@ const User = require('../models/user');
 const auth = async (req, res, next) => {
     try {
         let { authorization } = req.headers;
-        // console.log(authorization, 'authorization');
 
         if (!authorization) {
             throw {

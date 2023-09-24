@@ -31,7 +31,7 @@ const errorHandler = (err, req, res, next) => {
     }
 
     if (err.name === 'Forbidden') {
-        return statusCode(403, { message: err.message });
+        return statusCode(403, { name: err.name, message: err.message });
     }
 
     if (err.name === 'NotFound') {

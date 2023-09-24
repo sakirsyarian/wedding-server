@@ -55,9 +55,7 @@ class ControllerUser {
 
     static async adminRefreshToken(req, res, next) {
         try {
-            // refresh token
             let { refreshtoken } = req.headers;
-            console.log(refreshtoken, 'refreshtoken');
 
             if (!refreshtoken) {
                 throw {
@@ -209,6 +207,59 @@ class ControllerUser {
             }
 
             res.status(200).json({ message: `${user.name} successfully deleted` });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // * role = customer
+
+    // auth
+    static async customerSignin(req, res, next) {
+        try {
+            const { email, password } = req.body;
+            const user = await User.findOne({ email });
+
+            if (!user) {
+                throw {
+                    name: 'AuthenticationError',
+                    message: 'invalid email/ password',
+                };
+            }
+
+            const isValid = comparePassword(password, user.password);
+            if (!isValid) {
+                throw {
+                    name: 'AuthenticationError',
+                    message: 'invalid email/ password',
+                };
+            }
+
+            // if role is not user, return 403
+            const role = await Role.findOne({ _id: user.role });
+            if (role.name !== 'User') {
+                throw {
+                    name: 'Forbidden',
+                    message: 'admin is forbidden to enter',
+                };
+            }
+
+            user.password = null;
+            const access_token = generateToken({ id: user._id });
+            const refresh_token = generateRefreshToken({ id: user._id });
+
+            const userData = {
+                id: user._id,
+                email: user.email,
+                name: user.name,
+            };
+
+            res.status(200).json({
+                isSuccess: true,
+                access_token,
+                refresh_token,
+                data: userData,
+            });
         } catch (error) {
             next(error);
         }
