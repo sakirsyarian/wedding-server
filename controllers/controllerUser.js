@@ -249,7 +249,6 @@ class ControllerUser {
             const refresh_token = generateRefreshToken({ id: user._id });
 
             const userData = {
-                id: user._id,
                 email: user.email,
                 name: user.name,
             };
@@ -260,6 +259,31 @@ class ControllerUser {
                 refresh_token,
                 data: userData,
             });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async customerRegister(req, res, next) {
+        try {
+            const { email, password, username, phoneNumber } = req.body;
+
+            let bcryptjs = password;
+            if (password && password.length >= 5) {
+                bcryptjs = hashPassword(password);
+            }
+
+            const role = await Role.findOne({ name: 'User' });
+            const createUser = new User({ email, password: bcryptjs, username, phoneNumber, role: role._id });
+            const user = await createUser.save();
+
+            user.password = null;
+            const userData = {
+                email: user.email,
+                name: user.name,
+            };
+
+            res.status(201).json({ isSuccess: true, data: userData });
         } catch (error) {
             next(error);
         }

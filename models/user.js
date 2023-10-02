@@ -17,8 +17,15 @@ const UserSchema = new mongoose.Schema(
         password: {
             type: String,
             required: [true, '{PATH} is required'],
+            minlength: [5, '{PATH} is shorter than the minimum allowed length ({MINLENGTH})'],
         },
-        name: String,
+        username: {
+            type: String,
+            index: true,
+            unique: true,
+            required: [true, '{PATH} is required'],
+            uniqueCaseInsensitive: true,
+        },
         image: {
             type: String,
             default: 'default.png',
