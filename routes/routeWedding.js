@@ -13,4 +13,8 @@ router.delete('/v1/admin/weddings/:id', ControllerWedding.adminFindByIdAndDelete
 
 // * role = customer
 
+// bride
+router.post('/v1/customer/brides', ControllerWedding.customerBrideSave);
+// router.Put('/v1/customer/brides/:id', ControllerWedding.customerBrideFindByIdAndUpdate);
+
 module.exports = router;

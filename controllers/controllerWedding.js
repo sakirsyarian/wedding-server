@@ -1,6 +1,7 @@
 'use strict';
 
 const Wedding = require('../models/wedding');
+const Bride = require('../models/bride');
 
 class ControllerWedding {
     // * role = admin
@@ -172,6 +173,42 @@ class ControllerWedding {
             }
 
             res.status(200).json({ message: `${wedding.name} successfully deleted` });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // * role = admin
+
+    // bride
+    static async customerBrideSave(req, res, next) {
+        try {
+            const { id } = req.user;
+
+            // male
+            const { maleImage, maleFullName, maleNickName, maleFatherName, maleMotherName } = req.body;
+            const male = {
+                maleImage: maleImage.name,
+                maleFullName,
+                maleNickName,
+                maleFatherName,
+                maleMotherName,
+            };
+
+            // female
+            const { femaleImage, femaleFullName, femaleNickName, femaleFatherName, femaleMotherName } = req.body;
+            const female = {
+                femaleImage: femaleImage.name,
+                femaleFullName,
+                femaleNickName,
+                femaleFatherName,
+                femaleMotherName,
+            };
+
+            const createBride = new Bride({ male, female, user: id });
+            const bride = await createBride.save();
+
+            res.status(201).json({ isSuccess: true, data: bride });
         } catch (error) {
             next(error);
         }

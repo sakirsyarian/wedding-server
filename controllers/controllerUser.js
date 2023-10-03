@@ -288,6 +288,46 @@ class ControllerUser {
             next(error);
         }
     }
+
+    static async customerRefreshToken(req, res, next) {
+        try {
+            let { refreshtoken } = req.headers;
+
+            if (!refreshtoken) {
+                throw {
+                    name: 'AuthenticationError',
+                    message: 'you must login first',
+                };
+            }
+
+            refreshtoken = refreshtoken.replace('Bearer ', '');
+            const decode = verifyToken(refreshtoken);
+
+            if (decode.name === 'TokenExpiredError') {
+                throw {
+                    name: 'RefreshTokenExpiredError',
+                    message: 'you must login again',
+                };
+            }
+
+            const user = await User.findById(decode.id);
+            if (!user) {
+                throw {
+                    name: 'NotFound',
+                    message: 'user not found',
+                };
+            }
+
+            const access_token = generateToken({ id: user._id });
+
+            res.status(200).json({
+                isSuccess: true,
+                access_token,
+            });
+        } catch (error) {
+            next(error);
+        }
+    }
 }
 
 module.exports = ControllerUser;
