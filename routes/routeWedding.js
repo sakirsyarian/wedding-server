@@ -17,4 +17,7 @@ router.delete('/v1/admin/weddings/:id', ControllerWedding.adminFindByIdAndDelete
 router.post('/v1/customer/brides', ControllerWedding.customerBrideSave);
 // router.Put('/v1/customer/brides/:id', ControllerWedding.customerBrideFindByIdAndUpdate);
 
+// event
+router.post('/v1/customer/events', ControllerWedding.customerEventSave);
+
 module.exports = router;
