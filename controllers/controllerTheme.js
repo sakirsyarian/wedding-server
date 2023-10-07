@@ -1,19 +1,20 @@
 'use strict';
 
-const Template = require('../models/template');
+const Theme = require('../models/theme');
 
-class ControllerTemplate {
+class ControllerTheme {
+    // * role = admin
     static async adminFind(req, res, next) {
         try {
-            const templates = await Template.find().populate('category');
-            if (!templates.length) {
+            const themes = await Theme.find().populate('category');
+            if (!themes.length) {
                 throw {
                     name: 'NotFound',
-                    message: 'template data does not exist',
+                    message: 'theme data does not exist',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: templates });
+            res.status(200).json({ isSuccess: true, data: themes });
         } catch (error) {
             next(error);
         }
@@ -21,7 +22,7 @@ class ControllerTemplate {
 
     static async adminSave(req, res, next) {
         try {
-            const { name, category } = req.body;
+            const { name, cover, category } = req.body;
 
             // colors
             const { primary, secondary, tertiary, quaternary, quinary, text } = req.body;
@@ -35,10 +36,10 @@ class ControllerTemplate {
             const { greeting, background, above, frame, below, card } = req.body;
             const images = { greeting, background, above, frame, below, card };
 
-            const createTemplate = new Template({ name, category, colors, fonts, images });
-            const template = await createTemplate.save();
+            const createTheme = new Theme({ name, cover, category, colors, fonts, images });
+            const theme = await createTheme.save();
 
-            res.status(201).json({ isSuccess: true, data: template });
+            res.status(201).json({ isSuccess: true, data: theme });
         } catch (error) {
             next(error);
         }
@@ -47,16 +48,16 @@ class ControllerTemplate {
     static async adminFindById(req, res, next) {
         try {
             const { id } = req.params;
-            const template = await Template.findById(id);
+            const theme = await Theme.findById(id);
 
-            if (!template) {
+            if (!theme) {
                 throw {
                     name: 'NotFound',
-                    message: 'template not found',
+                    message: 'theme not found',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: template });
+            res.status(200).json({ isSuccess: true, data: theme });
         } catch (error) {
             next(error);
         }
@@ -79,20 +80,20 @@ class ControllerTemplate {
             const { greeting, background, above, frame, below, card } = req.body;
             const images = { greeting, background, above, frame, below, card };
 
-            const template = await Template.findByIdAndUpdate(
+            const theme = await Theme.findByIdAndUpdate(
                 id,
                 { name, category, colors, fonts, images },
                 { returnDocument: 'after', runValidators: true }
             );
 
-            if (!template) {
+            if (!theme) {
                 throw {
                     name: 'NotFound',
-                    message: 'template not found',
+                    message: 'theme not found',
                 };
             }
 
-            res.status(200).json({ isSuccess: true, data: template });
+            res.status(200).json({ isSuccess: true, data: theme });
         } catch (error) {
             next(error);
         }
@@ -101,20 +102,37 @@ class ControllerTemplate {
     static async adminFindByIdAndDelete(req, res, next) {
         try {
             const { id } = req.params;
-            const template = await Template.findByIdAndDelete(id);
+            const theme = await Theme.findByIdAndDelete(id);
 
-            if (!template) {
+            if (!theme) {
                 throw {
                     name: 'NotFound',
-                    message: 'template not found',
+                    message: 'theme not found',
                 };
             }
 
-            res.status(200).json({ message: `${template.name} successfully deleted` });
+            res.status(200).json({ message: `${theme.name} successfully deleted` });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // * role = customer
+    static async customerFind(req, res, next) {
+        try {
+            const themes = await Theme.find().populate('category');
+            if (!themes.length) {
+                throw {
+                    name: 'NotFound',
+                    message: 'theme data does not exist',
+                };
+            }
+
+            res.status(200).json({ isSuccess: true, data: themes });
         } catch (error) {
             next(error);
         }
     }
 }
 
-module.exports = ControllerTemplate;
+module.exports = ControllerTheme;

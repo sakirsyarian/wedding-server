@@ -2,12 +2,13 @@
 
 const mongoose = require('../config/mongodb');
 
-const TemplateSchema = new mongoose.Schema(
+const ThemeSchema = new mongoose.Schema(
     {
         name: {
             type: String,
             required: [true, '{PATH} is required'],
         },
+        cover: String,
         colors: {
             primary: String,
             secondary: String,
@@ -39,6 +40,6 @@ const TemplateSchema = new mongoose.Schema(
     { timestamps: true }
 );
 
-const Template = mongoose.model('Template', TemplateSchema);
+const Theme = mongoose.model('Theme', ThemeSchema);
 
-module.exports = Template;
+module.exports = Theme;

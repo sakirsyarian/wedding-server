@@ -9,7 +9,7 @@ const routerRole = require('./routeRole');
 const routerAuth = require('./routeAuth');
 const routerWedding = require('./routeWedding');
 const routerCategory = require('./routeCategory');
-const routerTemplate = require('./routeTemplate');
+const routerTheme = require('./routeTheme');
 const routerTestimonial = require('./routeTestimonial');
 
 router.get('/', (req, res) => {
@@ -28,7 +28,7 @@ router.use(routerUser);
 router.use(routerRole);
 router.use(routerWedding);
 router.use(routerCategory);
-router.use(routerTemplate);
+router.use(routerTheme);
 router.use(routerTestimonial);
 
 module.exports = router;

@@ -179,7 +179,7 @@ class ControllerWedding {
         }
     }
 
-    // * role = admin
+    // * role = customer
 
     // bride
     static async customerBrideSave(req, res, next) {
