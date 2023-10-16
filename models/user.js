@@ -47,7 +47,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 // Menerapkan plugin pada skema
-UserSchema.plugin(uniqueValidator, { message: '{PATH} must be unique.' });
+UserSchema.plugin(uniqueValidator, { message: '{PATH} sudah digunakan' });
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

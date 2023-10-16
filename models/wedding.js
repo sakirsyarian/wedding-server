@@ -10,54 +10,28 @@ const WeddingSchema = new mongoose.Schema(
             required: [true, '{PATH} is required'],
             unique: true,
         },
-        mainImage: {
-            type: String,
+        mainImage: String,
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: [true, '{PATH} is required'],
+        },
+        bride: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Bride',
+            required: [true, '{PATH} is required'],
+        },
+        event: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Event',
+            required: [true, '{PATH} is required'],
+        },
+        theme: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Theme',
             required: [true, '{PATH} is required'],
         },
         music: String,
-        men: {
-            menName: {
-                type: String,
-                required: [true, '{PATH} is required'],
-            },
-            menImage: {
-                type: String,
-                required: [true, '{PATH} is required'],
-            },
-            menFather: String,
-            menMother: String,
-            menSocialMedia: {
-                menFacebook: String,
-                menInstagram: String,
-                menThreads: String,
-            },
-        },
-        female: {
-            femaleName: {
-                type: String,
-                required: [true, '{PATH} is required'],
-            },
-            femaleImage: {
-                type: String,
-                required: [true, '{PATH} is required'],
-            },
-            femaleFather: String,
-            femaleMother: String,
-            femaleSocialMedia: {
-                femaleFacebook: String,
-                femaleInstagram: String,
-                femaleThreads: String,
-            },
-        },
-        countDown: Date,
-        marriageContract: {
-            marriageDate: Date,
-            marriageLocation: String,
-        },
-        reception: {
-            receptionDate: Date,
-            receptionLocation: String,
-        },
         loveStory: {
             beginning: {
                 beginningImage: String,
@@ -91,11 +65,7 @@ const WeddingSchema = new mongoose.Schema(
             },
             address: String,
         },
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'User',
-            required: [true, '{PATH} is required'],
-        },
+
         test: Boolean,
     },
     { timestamps: true }

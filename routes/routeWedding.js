@@ -12,10 +12,8 @@ router.patch('/v1/admin/weddings/:id', ControllerWedding.adminFindByIdAndPatch);
 router.delete('/v1/admin/weddings/:id', ControllerWedding.adminFindByIdAndDelete);
 
 // * role = customer
-
-// bride
-router.post('/v1/customer/brides', ControllerWedding.customerBrideSave);
-// router.Put('/v1/customer/brides/:id', ControllerWedding.customerBrideFindByIdAndUpdate);
+router.post('/v1/customer/weddings', ControllerWedding.customerSave);
+router.get('/v1/customer/weddings/:id', ControllerWedding.customerFindOne);
 
 // event
 router.post('/v1/customer/events', ControllerWedding.customerEventSave);

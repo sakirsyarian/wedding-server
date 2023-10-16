@@ -1,5 +1,7 @@
 'use strict';
 
+const randomString = require('../helpers/randomString');
+
 const Wedding = require('../models/wedding');
 const Bride = require('../models/bride');
 const Event = require('../models/event');
@@ -12,7 +14,7 @@ class ControllerWedding {
             if (!weddings.length) {
                 throw {
                     name: 'NotFound',
-                    message: 'wedding data does not exist',
+                    message: 'Wedding data does not exist',
                 };
             }
 
@@ -102,7 +104,7 @@ class ControllerWedding {
             if (!wedding) {
                 throw {
                     name: 'NotFound',
-                    message: 'wedding not found',
+                    message: 'Wedding not found',
                 };
             }
 
@@ -126,7 +128,7 @@ class ControllerWedding {
             if (!wedding) {
                 throw {
                     name: 'NotFound',
-                    message: 'wedding not found',
+                    message: 'Wedding not found',
                 };
             }
 
@@ -151,7 +153,7 @@ class ControllerWedding {
             if (!wedding) {
                 throw {
                     name: 'NotFound',
-                    message: 'wedding not found',
+                    message: 'Wedding not found',
                 };
             }
 
@@ -169,7 +171,7 @@ class ControllerWedding {
             if (!wedding) {
                 throw {
                     name: 'NotFound',
-                    message: 'wedding not found',
+                    message: 'Wedding not found',
                 };
             }
 
@@ -180,41 +182,50 @@ class ControllerWedding {
     }
 
     // * role = customer
-
-    // bride
-    static async customerBrideSave(req, res, next) {
+    static async customerSave(req, res, next) {
         try {
+            // user
             const { id } = req.user;
+            const { bride, event, theme } = req.body;
 
-            // male
-            const { maleImage, maleFullName, maleNickName, maleFatherName, maleMotherName } = req.body;
-            const male = {
-                maleImage: maleImage.name,
-                maleFullName,
-                maleNickName,
-                maleFatherName,
-                maleMotherName,
-            };
+            // slug
+            const brideNickName = await Bride.findById(bride);
+            const slug = `${randomString()}-${brideNickName.male?.maleNickName.toLowerCase()}-${brideNickName.female?.femaleNickName.toLowerCase()}`;
 
-            // female
-            const { femaleImage, femaleFullName, femaleNickName, femaleFatherName, femaleMotherName } = req.body;
-            const female = {
-                femaleImage: femaleImage.name,
-                femaleFullName,
-                femaleNickName,
-                femaleFatherName,
-                femaleMotherName,
-            };
+            const createWedding = new Wedding({
+                slug,
+                bride,
+                event,
+                theme,
+                user: id,
+            });
+            const weddingData = await createWedding.save();
 
-            const createBride = new Bride({ male, female, user: id });
-            const bride = await createBride.save();
-
-            res.status(201).json({ isSuccess: true, data: bride });
+            res.status(201).json({ isSuccess: true, data: weddingData });
         } catch (error) {
             next(error);
         }
     }
 
+    static async customerFindOne(req, res, next) {
+        try {
+            const { id } = req.params;
+            const wedding = await Wedding.findOne({ user: id });
+
+            if (!wedding) {
+                throw {
+                    name: 'NotFound',
+                    message: 'Wedding not found',
+                };
+            }
+
+            res.status(200).json({ isSuccess: true, data: wedding });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    // event
     static async customerEventSave(req, res, next) {
         try {
             const { id } = req.user;

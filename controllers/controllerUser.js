@@ -249,8 +249,9 @@ class ControllerUser {
             const refresh_token = generateRefreshToken({ id: user._id });
 
             const userData = {
+                id: user._id,
                 email: user.email,
-                name: user.name,
+                username: user.username,
             };
 
             res.status(200).json({
