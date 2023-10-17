@@ -224,64 +224,6 @@ class ControllerWedding {
             next(error);
         }
     }
-
-    // event
-    static async customerEventSave(req, res, next) {
-        try {
-            const { id } = req.user;
-
-            // main
-            const {
-                mainHeading,
-                mainDate,
-                mainTimeStart,
-                mainTimeFinish,
-                mainUntilDone,
-                mainTimeZone,
-                mainLocation,
-                mainAddress,
-            } = req.body;
-            const main = {
-                mainHeading,
-                mainDate,
-                mainTimeStart,
-                mainTimeFinish,
-                mainUntilDone,
-                mainTimeZone,
-                mainLocation,
-                mainAddress,
-            };
-
-            // optional
-            const {
-                optionalHeading,
-                optionalDate,
-                optionalTimeStart,
-                optionalTimeFinish,
-                optionalUntilDone,
-                optionalTimeZone,
-                optionalLocation,
-                optionalAddress,
-            } = req.body;
-            const optional = {
-                optionalHeading,
-                optionalDate,
-                optionalTimeStart,
-                optionalTimeFinish,
-                optionalUntilDone,
-                optionalTimeZone,
-                optionalLocation,
-                optionalAddress,
-            };
-
-            const createEvent = new Event({ main, optional, user: id });
-            const event = await createEvent.save();
-
-            res.status(201).json({ isSuccess: true, data: event });
-        } catch (error) {
-            next(error);
-        }
-    }
 }
 
 module.exports = ControllerWedding;

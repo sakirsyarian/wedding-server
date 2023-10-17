@@ -15,7 +15,4 @@ router.delete('/v1/admin/weddings/:id', ControllerWedding.adminFindByIdAndDelete
 router.post('/v1/customer/weddings', ControllerWedding.customerSave);
 router.get('/v1/customer/weddings/:id', ControllerWedding.customerFindOne);
 
-// event
-router.post('/v1/customer/events', ControllerWedding.customerEventSave);
-
 module.exports = router;
