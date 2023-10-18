@@ -1,6 +1,7 @@
 'use strict';
 
 const Theme = require('../models/theme');
+const Wedding = require('../models/wedding');
 
 class ControllerTheme {
     // * role = admin
@@ -129,6 +130,50 @@ class ControllerTheme {
             }
 
             res.status(200).json({ isSuccess: true, data: themes });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async customerThemeFindOne(req, res, next) {
+        try {
+            const { id } = req.user;
+            const theme = await Wedding.findOne({ user: id });
+
+            if (!theme) {
+                throw {
+                    name: 'NotFound',
+                    message: 'Theme not found',
+                };
+            }
+
+            res.status(200).json({ isSuccess: true, data: theme });
+        } catch (error) {
+            next(error);
+        }
+    }
+
+    static async customerThemeFindOneAndUpdate(req, res, next) {
+        try {
+            const { id } = req.user;
+            const { theme } = req.body;
+
+            // male
+
+            const result = await Wedding.findOneAndUpdate(
+                { user: id },
+                { theme },
+                { returnDocument: 'after', runValidators: true }
+            );
+
+            if (!result) {
+                throw {
+                    name: 'NotFound',
+                    message: 'Theme not found',
+                };
+            }
+
+            res.status(200).json({ isSuccess: true, data: result });
         } catch (error) {
             next(error);
         }

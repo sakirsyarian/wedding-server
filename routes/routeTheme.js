@@ -12,5 +12,7 @@ router.delete('/v1/admin/themes/:id', ControllerTheme.adminFindByIdAndDelete);
 
 // * role = customer
 router.get('/v1/customer/themes', ControllerTheme.customerFind);
+router.get('/v1/customer/theme/selected', ControllerTheme.customerThemeFindOne);
+router.patch('/v1/customer/theme', ControllerTheme.customerThemeFindOneAndUpdate);
 
 module.exports = router;
