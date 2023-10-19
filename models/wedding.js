@@ -31,25 +31,12 @@ const WeddingSchema = new mongoose.Schema(
             ref: 'Theme',
             required: [true, '{PATH} is required'],
         },
-        music: String,
-        loveStory: {
-            beginning: {
-                beginningImage: String,
-                beginningDate: Date,
-                beginningDescription: String,
-            },
-            dating: {
-                datingImage: String,
-                datingDate: Date,
-                datingDescription: String,
-            },
-            wedding: {
-                weddingImage: String,
-                weddingDate: Date,
-                weddingDescription: String,
-            },
+        story: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Story',
         },
         galleries: [String],
+        music: String,
         gift: {
             bank: {
                 bca: String,

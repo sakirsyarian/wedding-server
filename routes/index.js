@@ -12,6 +12,7 @@ const routerBride = require('./routeBride');
 const routerEvent = require('./routeEvent');
 const routerCategory = require('./routeCategory');
 const routerTheme = require('./routeTheme');
+const routerStory = require('./routeStory');
 const routerTestimonial = require('./routeTestimonial');
 
 router.get('/', (req, res) => {
@@ -33,6 +34,7 @@ router.use(routerBride);
 router.use(routerEvent);
 router.use(routerCategory);
 router.use(routerTheme);
+router.use(routerStory);
 router.use(routerTestimonial);
 
 module.exports = router;
