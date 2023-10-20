@@ -12,6 +12,7 @@ const routerBride = require('./routeBride');
 const routerEvent = require('./routeEvent');
 const routerCategory = require('./routeCategory');
 const routerTheme = require('./routeTheme');
+const routerGift = require('./routeGift');
 const routerStory = require('./routeStory');
 const routerTestimonial = require('./routeTestimonial');
 
@@ -34,6 +35,7 @@ router.use(routerBride);
 router.use(routerEvent);
 router.use(routerCategory);
 router.use(routerTheme);
+router.use(routerGift);
 router.use(routerStory);
 router.use(routerTestimonial);
 

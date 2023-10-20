@@ -10,7 +10,6 @@ const WeddingSchema = new mongoose.Schema(
             required: [true, '{PATH} is required'],
             unique: true,
         },
-        mainImage: String,
         user: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
@@ -35,24 +34,13 @@ const WeddingSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Story',
         },
+        gift: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Gift',
+        },
+        mainImage: String,
         galleries: [String],
         music: String,
-        gift: {
-            bank: {
-                bca: String,
-                bri: String,
-                bni: String,
-                mandiri: String,
-            },
-            digital: {
-                gopay: String,
-                ovo: String,
-                dana: String,
-                linkaja: String,
-            },
-            address: String,
-        },
-
         test: Boolean,
     },
     { timestamps: true }
