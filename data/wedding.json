@@ -3,51 +3,51 @@
     "mainImage": "wedding.png",
     "music": "love.mp3",
     "men": {
-        "name": "Sarian",
-        "image": "sarian.png",
-        "father": "Ronaldo",
-        "mother": "Katrina",
-        "socialMedia": {
-            "facebook": "sarian",
-            "instagram": "sarian",
-            "threads": "sarian"
+        "menName": "Sarian",
+        "menImage": "sarian.png",
+        "menFather": "Ronaldo",
+        "menMother": "Katrina",
+        "menSocialMedia": {
+            "menFacebook": "sarian",
+            "menInstagram": "sarian",
+            "menThreads": "sarian"
         }
     },
     "female": {
-        "name": "Astrid",
-        "image": "astrid.png",
-        "father": "Messi",
-        "mother": "Kendall",
-        "socialMedia": {
-            "facebook": "astrid",
-            "instagram": "astrid",
-            "threads": "astrid"
+        "femaleName": "Astrid",
+        "femaleImage": "astrid.png",
+        "femaleFather": "Messi",
+        "femaleMother": "Kendall",
+        "femaleSocialMedia": {
+            "femaleFacebook": "astrid",
+            "femaleInstagram": "astrid",
+            "femaleThreads": "astrid"
         }
     },
     "countDown": "2023-09-09T05:49:10.729+00:00",
     "marriageContract": {
-        "date": "2023-09-09T05:49:10.729+00:00",
-        "location": "Rumah Astrid"
+        "marriageDate": "2023-09-09T05:49:10.729+00:00",
+        "marriageLocation": "Rumah Astrid"
     },
     "reception": {
-        "date": "2023-09-09T05:49:10.729+00:00",
-        "location": "Rumah Astrid"
+        "receptionDate": "2023-09-09T05:49:10.729+00:00",
+        "receptionLocation": "Rumah Astrid"
     },
     "loveStory": {
         "beginning": {
-            "image": "beginning.png",
-            "date": "2023-09-09T05:49:10.729+00:00",
-            "description": "Waktu itu baru ketemu dengan Astrid"
+            "begginningImage": "beginning.png",
+            "beginningDate": "2023-09-09T05:49:10.729+00:00",
+            "beginningDescription": "Waktu itu baru ketemu dengan Astrid"
         },
         "dating": {
-            "image": "dating.png",
-            "date": "2023-09-09T05:49:10.729+00:00",
-            "description": "Astrid dan Sarian mencintai satu sama lain"
+            "beginningImage": "dating.png",
+            "beginningDate": "2023-09-09T05:49:10.729+00:00",
+            "beginningDescription": "Astrid dan Sarian mencintai satu sama lain"
         },
         "wedding": {
-            "image": "wedding.png",
-            "date": "2023-09-09T05:49:10.729+00:00",
-            "description": "Akhirnya kita memustuskan untuk nikah"
+            "beginningImage": "wedding.png",
+            "beginningDate": "2023-09-09T05:49:10.729+00:00",
+            "beginningDescription": "Akhirnya kita memustuskan untuk nikah"
         }
     },
     "galleries": [
@@ -57,16 +57,16 @@
     ],
     "gift": {
         "bank": {
-            "bca": 64279356105,
-            "bri": 64279356105,
-            "bni": 64279356105,
-            "mandiri": 64279356105
+            "bca": "64279356105",
+            "bri": "64279356105",
+            "bni": "64279356105",
+            "mandiri": "64279356105"
         },
         "digital": {
-            "gopay": 64279356105,
-            "ovo": 64279356105,
-            "dana": 64279356105,
-            "linkaja": 64279356105
+            "gopay": "64279356105",
+            "ovo": "64279356105",
+            "dana": "64279356105",
+            "linkaja": "64279356105"
         },
         "address": "Rumah Astrid"
     }

@@ -3,9 +3,9 @@
 const mongoose = require('../config/mongodb');
 
 const TestimonialSchema = new mongoose.Schema({
-    valuation: {
+    score: {
         type: String,
-        required: true,
+        required: [true, '{PATH} is required'],
     },
     message: String,
 });

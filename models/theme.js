@@ -1,16 +1,14 @@
 'use strict';
 
 const mongoose = require('../config/mongodb');
-const { CategorySchema } = require('./category');
 
-const TemplateSchema = new mongoose.Schema(
+const ThemeSchema = new mongoose.Schema(
     {
         name: {
             type: String,
-            required: true,
+            required: [true, '{PATH} is required'],
         },
-        categoryId: String,
-        author: String,
+        cover: String,
         colors: {
             primary: String,
             secondary: String,
@@ -32,12 +30,16 @@ const TemplateSchema = new mongoose.Schema(
             below: String,
             card: String,
         },
-        category: CategorySchema,
+        category: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Category',
+            required: [true, '{PATH} is required'],
+        },
         test: Boolean,
     },
     { timestamps: true }
 );
 
-const Template = mongoose.model('Template', TemplateSchema);
+const Theme = mongoose.model('Theme', ThemeSchema);
 
-module.exports = Template;
+module.exports = Theme;

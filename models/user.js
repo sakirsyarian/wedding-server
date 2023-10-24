@@ -9,26 +9,37 @@ const UserSchema = new mongoose.Schema(
     {
         email: {
             type: String,
-            required: true,
+            index: true,
             unique: true,
+            required: [true, '{PATH} is required'],
             uniqueCaseInsensitive: true,
         },
         password: {
             type: String,
-            required: true,
+            required: [true, '{PATH} is required'],
+            minlength: [5, '{PATH} is shorter than the minimum allowed length ({MINLENGTH})'],
         },
-        name: String,
+        username: {
+            type: String,
+            index: true,
+            unique: true,
+            required: [true, '{PATH} is required'],
+            uniqueCaseInsensitive: true,
+        },
         image: {
             type: String,
             default: 'default.png',
         },
         phoneNumber: String,
-        isActive: Boolean,
+        isActive: {
+            type: Boolean,
+            default: true,
+        },
         testimonial: TestimonialSchema,
         role: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Role',
-            required: true,
+            required: [true, '{PATH} is required'],
         },
         test: Boolean,
     },
@@ -36,7 +47,7 @@ const UserSchema = new mongoose.Schema(
 );
 
 // Menerapkan plugin pada skema
-UserSchema.plugin(uniqueValidator);
+UserSchema.plugin(uniqueValidator, { message: '{PATH} sudah digunakan' });
 const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

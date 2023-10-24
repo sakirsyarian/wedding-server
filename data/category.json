@@ -1,3 +1,11 @@
-{
-    "name": "warrior"
-}
+[
+    {
+        "name": "Warrior"
+    },
+    {
+        "name": "Elite"
+    },
+    {
+        "name": "Master"
+    }
+]
