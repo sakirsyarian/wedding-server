@@ -38,9 +38,12 @@ const WeddingSchema = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Gift',
         },
+        music: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Music',
+        },
         mainImage: String,
         galleries: [String],
-        music: String,
         test: Boolean,
     },
     { timestamps: true }

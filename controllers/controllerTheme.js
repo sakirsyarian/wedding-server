@@ -158,8 +158,6 @@ class ControllerTheme {
             const { id } = req.user;
             const { theme } = req.body;
 
-            // male
-
             const result = await Wedding.findOneAndUpdate(
                 { user: id },
                 { theme },
