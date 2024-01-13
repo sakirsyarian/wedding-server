@@ -38,6 +38,7 @@ const errorHandler = (err, req, res, next) => {
         return statusCode(404, { name: err.name, message: err.message });
     }
 
+    console.log(err);
     return statusCode(500, { message: 'Internal server error' });
 };
 

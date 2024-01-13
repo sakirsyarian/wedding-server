@@ -29,25 +29,22 @@ class ControllerStory {
             const { id } = req.user;
 
             // beginning
-            const { beginningImage, beginningDate, beginningStory } = req.body;
+            const { beginningDate, beginningStory } = req.body;
             const beginning = {
-                beginningImage,
                 beginningDate,
                 beginningStory,
             };
 
             // dating
-            const { datingImage, datingDate, datingStory } = req.body;
+            const { datingDate, datingStory } = req.body;
             const dating = {
-                datingImage,
                 datingDate,
                 datingStory,
             };
 
             // wedding
-            const { weddingImage, weddingDate, weddingStory } = req.body;
+            const { weddingDate, weddingStory } = req.body;
             const wedding = {
-                weddingImage,
                 weddingDate,
                 weddingStory,
             };
@@ -64,27 +61,32 @@ class ControllerStory {
     static async customerStoryFindOneAndUpdate(req, res, next) {
         try {
             const { id } = req.user;
+            console.log(req.body, '<<< body');
+            console.log(req.files, '<<< files');
 
             // beginning
-            const { beginningImage, beginningDate, beginningStory } = req.body;
+            const { beginningImage } = req.files;
+            const { beginningDate, beginningStory } = req.body;
             const beginning = {
-                beginningImage,
+                beginningImage: beginningImage[0].filename,
                 beginningDate,
                 beginningStory,
             };
 
             // dating
-            const { datingImage, datingDate, datingStory } = req.body;
+            const { datingImage } = req.files;
+            const { datingDate, datingStory } = req.body;
             const dating = {
-                datingImage,
+                datingImage: datingImage[0].filename,
                 datingDate,
                 datingStory,
             };
 
             // wedding
-            const { weddingImage, weddingDate, weddingStory } = req.body;
+            const { weddingImage } = req.files;
+            const { weddingDate, weddingStory } = req.body;
             const wedding = {
-                weddingImage,
+                weddingImage: weddingImage[0].filename,
                 weddingDate,
                 weddingStory,
             };
@@ -104,6 +106,7 @@ class ControllerStory {
 
             res.status(200).json({ isSuccess: true, data: story });
         } catch (error) {
+            console.log(error);
             next(error);
         }
     }
